@@ -16,12 +16,19 @@
 Successfully.closed.tasks
 
 ├── SQL_Юдаков.txt # SQL-скрипт создания БД и таблиц
+
 ├── test_batch_insert_users.py # Генерация и вставка пользователей (пакетно)
+
 ├── test_insert_clients.py # Генерация и вставка клиентов
+
 ├── test_insert_tasks.py # Генерация и вставка задач
+
 ├── clients_data.csv # Данные о клиентах
+
 ├── tasks_data.csv # Данные о задачах
+
 ├── users_data.csv # Данные о пользователях (менеджерах)
+
 └── README.md # Описание проекта
 
 ## 🗄️ Модель данных
