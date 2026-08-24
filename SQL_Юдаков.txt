@@ -1,0 +1,76 @@
+CREATE DATABASE test_task
+    WITH 
+    OWNER = postgres
+    ENCODING = 'WIN1251'
+    LC_COLLATE = 'ru-RU'
+    LC_CTYPE = 'ru-RU'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+
+
+-- --- DROP TABLE IF EXISTS test.users;
+
+CREATE TABLE IF NOT EXISTS test.users
+(
+    "USER_ID" integer NOT NULL,
+    "LAST_NAME" text NOT NULL,
+    "START_WORK" integer NOT NULL,
+    "END_WORK" integer NOT NULL,
+    CONSTRAINT "USERS_pkey" PRIMARY KEY ("USER_ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS test.users
+    OWNER to postgres;
+
+-- --- DROP TABLE IF EXISTS test.clients;
+
+CREATE TABLE IF NOT EXISTS test.clients
+(
+    "CLIENT_ID" integer NOT NULL,
+    "NAME" text NOT NULL,
+    "CATEGORY" text NOT NULL,
+    CONSTRAINT clients_pkey PRIMARY KEY ("CLIENT_ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS test.clients
+    OWNER to postgres;
+
+SELECT * FROM test.clients;
+
+-- --- DROP TABLE IF EXISTS test.tasks;
+
+CREATE TABLE IF NOT EXISTS test.tasks
+(
+    "TASK_ID" integer NOT NULL,
+	"CLIENT_ID" integer NOT NULL,
+	"USER_ID" integer NOT NULL,
+    "STATUS" text NOT NULL,
+	"START_DATE" text NOT NULL,
+    "END_DATE" text NOT NULL,
+    CONSTRAINT tasks_pkey PRIMARY KEY ("TASK_ID"),
+    FOREIGN KEY ("CLIENT_ID") REFERENCES test.clients("CLIENT_ID"),
+    FOREIGN KEY ("USER_ID") REFERENCES test.users("USER_ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS test.tasks
+    OWNER to postgres;
+
+SELECT count(distinct "TASK_ID") FROM test.tasks
+where "STATUS" = 'success'; -- 4435
+
+SELECT count(distinct "TASK_ID") FROM test.tasks; -- 9002
+
+SELECT
+(SUM(CASE WHEN "STATUS" = 'success' THEN 1 ELSE 0 END) / COUNT(DISTINCT "TASK_ID")::float) * 100
+FROM test.tasks; -- 49.26%
+
+SELECT * FROM test.users;
+SELECT * FROM test.clients;
+SELECT * FROM test.tasks;
