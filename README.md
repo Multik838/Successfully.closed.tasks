@@ -93,8 +93,10 @@ Successfully.closed.tasks
 
 **Аналитические запросы SQL**
 - Ниже приведены примеры SQL-запросов для решения поставленных задач:
+- 
   Топ-5 менеджеров по доле успешных задач
-      sql
+  
+  ```
       SELECT 
           u."LAST_NAME",
           COUNT(DISTINCT t."TASK_ID") AS total_tasks,
@@ -105,3 +107,4 @@ Successfully.closed.tasks
       GROUP BY u."LAST_NAME"
       ORDER BY success_rate DESC
       LIMIT 5;
+  ```
