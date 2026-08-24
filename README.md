@@ -78,6 +78,7 @@ Successfully.closed.tasks
 - Выполните скрипт из файла SQL_Юдаков.txt для создания базы данных и таблиц.
 - В каждом Python-скрипте укажите свои параметры подключения в переменной DB_CONFIG:
 
+```
     DB_CONFIG = {
       'host': 'localhost',
       'port': '5432',
@@ -85,6 +86,7 @@ Successfully.closed.tasks
       'user': 'postgres',      # ваш пользователь
       'password': '12345'      # ваш пароль
   }
+```
 
 ### 4. Генерация и загрузка тестовых данных
 - Клиенты: python test_insert_clients.py (запросит количество)
